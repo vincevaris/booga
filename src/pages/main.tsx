@@ -34,7 +34,7 @@ export const Main = () => {
     <div className='main'>
         <button className='refresh' onClick={onRefresh} disabled={disabled}>Refresh</button>
         <div className='posts'>
-            {postsList?.sort().map((post) => <Post key={post.id} post={post}/>)}
+            {postsList?.map((post) => <Post key={post.id} post={post}/>)}
         </div>
     </div>
     );
