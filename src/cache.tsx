@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, limit, orderBy, query, Timestamp } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, limit, orderBy, query, Timestamp, where } from "firebase/firestore";
 import { db } from "./config/firebase";
 import { IPost, IUser } from "./pages/main";
 
@@ -27,13 +27,19 @@ export const getUserWithCache = async (id: string) => {
         const userCollectionRef = collection(db, 'users');
         const userRef = doc(userCollectionRef, id);
 
-        console.log(`Creating document for user id ${id}`)
-        const userSnap = await getDoc(userRef);
-        const user = { ...userSnap.data(), id: userSnap.id, } as IUser;
+        console.log(`Creating cached document for user id ${id}`)
+        await getDoc(userRef)
+            .then((result) => {
+                if (result.exists()) {
+                    const user = { ...result.data(), id: result.id, } as IUser;
 
-        console.log(`Updating cache for user id ${id}`);
-        userCache.set(user.id, user);
-        saveCacheSession();
+                    console.log(`Updating cache for user id ${id}`);
+                    userCache.set(user.id, user);
+                    saveCacheSession();
+                }
+            })
+            .catch((error) => console.log(error));
+        
     } else
         console.log(`Using previous cache for user id ${id}`);
 
