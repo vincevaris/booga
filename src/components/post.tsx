@@ -9,6 +9,16 @@ interface Props {
     post: IPost,
 }
 
+const isValidUrl = (urlString: string) => {
+    let url;
+    try {
+        url = new URL(urlString);
+    } catch (error) {
+        return false;
+    }
+    return url.protocol === 'http:' || url.protocol === 'https:';
+}
+
 export const Post = (props: Props) => {
     const { post } = props;
     const [user, setUser] = useState<IUser | null>();
@@ -18,13 +28,20 @@ export const Post = (props: Props) => {
 
     useEffect(() => { fetchUser() }, []);
 
+    const styledContent = post.content.split(' ')
+            .map(s => {
+                if (isValidUrl(s))
+                    return <a href={s} rel="noreferrer" target="_blank">{s} </a>;
+                return <span>{s} </span>
+            });
+
     return (
     <div className="post">
         <div className="post_displayName">
             {user?.displayName || 'Deleted user'}
         </div>
         <div className="post_content">
-            {post.content}
+            {styledContent}
         </div>
         <div className="post_createdAt">
             {post.createdAt.toDate().toUTCString()}
