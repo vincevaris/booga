@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom";
 import { getUserWithCache } from "../cache";
 import { auth } from "../config/firebase";
 import { IPost, IUser } from "../pages/main";
@@ -38,7 +39,7 @@ export const Post = (props: Props) => {
     return (
     <div className="post">
         <div className="post_displayName">
-            {user?.displayName || 'Deleted user'}
+            <Link to={`/u/${user?.id}`}>{user?.displayName || 'Unknown user'}</Link>
         </div>
         <div className="post_content">
             {styledContent}

@@ -3,6 +3,7 @@ body {
     font-family: 'Roboto';
     background-color: #2D3833;
     color: white;
+    text-align: center;
 }
 
 input[type=submit],
@@ -95,7 +96,7 @@ a:hover {
     padding-top: 80px;
 }
 
-.main, .register, .login, .create-post {
+.main, .register, .login, .create-post, .user-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -128,6 +129,7 @@ form {
     padding: 20px 26px;
     gap: 12px;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: left;
 }
 
 @media only screen and (max-width: 800px) {
@@ -148,9 +150,15 @@ form {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-.post_displayName {
-    font-size: 32px;
+.post_displayName a {
+    font-size: 30px;
     font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.post_displayName a:hover {
+    color: inherit;
 }
 
 .post_createdAt {
@@ -193,4 +201,36 @@ form {
 
 .reply_content {
     font-size: 14px;
+}
+
+.user-profile_info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: fixed;
+    background: #2D3833;
+}
+
+.user-profile_refresh {
+    flex-grow: 0;
+}
+
+.user-profile_content {
+    display: flex;
+    justify-content: center;
+}
+
+.user-profile_posts {
+    margin-top: 132px;
+    display: flex;  
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.user-profile_displayName {
+    font-size: 32px;
+    font-weight: bold;
 }
