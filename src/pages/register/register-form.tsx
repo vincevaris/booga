@@ -32,26 +32,33 @@ export const RegisterForm = () => {
 
     const usersRef = collection(db, 'users');
 
+    const [disabled, setDisabled] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const onRegister = async (data: RegisterFormData) => createUserWithEmailAndPassword(auth, data.email, data.password)
-        .then(async (result) => {
-            const userRef = doc(usersRef, result.user.uid);
-            await setDoc(userRef, {
-                userId: userRef.id,
-                displayName: data.displayName,
-            });
+    const onRegister = async (data: RegisterFormData) => {
+        setDisabled(true);
+        createUserWithEmailAndPassword(auth, data.email, data.password)
+            .then(async (result) => {
+                const userRef = doc(usersRef, result.user.uid);
+                await setDoc(userRef, {
+                    userId: userRef.id,
+                    displayName: data.displayName,
+                });
 
-            navigate('/');
-        })
-        .catch((error) => setErrorMessage(error.message));
+                navigate('/');
+            })
+            .catch((error) => {
+                setErrorMessage(error.message);
+                setDisabled(false);
+            });
+    };
 
     return (
     <form onSubmit={handleSubmit(onRegister)}>
         <input type="email" placeholder="Email..." {...register("email")} />
         <input type="password" placeholder="Password..." {...register("password")} />
         <input placeholder="Display name..." {...register("displayName")} />
-        <input type="submit" value="Register"/>
+        <input type="submit" value="Register" disabled={disabled}/>
         {errorMessage && (
             <p className="error">{errorMessage}</p>
         )}

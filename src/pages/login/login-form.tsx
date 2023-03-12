@@ -27,17 +27,24 @@ export const LoginForm = () => {
         resolver: yupResolver(schema),
     });
 
+    const [disabled, setDisabled] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const onLogin = async (data: LoginFormData) => signInWithEmailAndPassword(auth, data.email, data.password)
-        .then((result) => navigate('/'))
-        .catch((error) => setErrorMessage(error.message));
+    const onLogin = async (data: LoginFormData) => {
+        setDisabled(true);
+        signInWithEmailAndPassword(auth, data.email, data.password)
+            .then((result) => navigate('/'))
+            .catch((error) => {
+                setErrorMessage(error.message)
+                setDisabled(false);
+            });
+    };
 
     return (
     <form onSubmit={handleSubmit(onLogin)}>
         <input type="email" placeholder="Email..." {...register("email")} />
         <input type="password" placeholder="Password..." {...register("password")} />
-        <input type="submit" value="Log In"/>
+        <input type="submit" value="Log In" disabled={disabled}/>
         {errorMessage && (
             <p className="error">{errorMessage}</p>
         )}
