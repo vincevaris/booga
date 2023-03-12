@@ -47,12 +47,12 @@ p {
     margin: 0;
 }
 
-a:visited {
-    color: inherit;
+a {
+    color: #BBD9CB;
 }
 
 a:hover {
-    color: #adadad;
+    color: #96ABA1;
 }
 
 .navbar {
