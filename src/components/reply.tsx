@@ -9,7 +9,7 @@ interface Props {
     post: IPost,
 }
 
-export const Post = (props: Props) => {
+export const Reply = (props: Props) => {
     const { post } = props;
     const [user, setUser] = useState<IUser | null>();
     const [ourUser] = useAuthState(auth);
@@ -19,24 +19,20 @@ export const Post = (props: Props) => {
     useEffect(() => { fetchUser() }, []);
 
     return (
-    <div className="post">
-        <div className="post_displayName">
+    <div className="reply">
+        <div className="reply_displayName">
             {user?.displayName || 'Deleted user'}
         </div>
-        <div className="post_content">
+        <div className="reply_content">
             {post.content}
         </div>
-        <div className="post_createdAt">
-            {post.createdAt.toDate().toUTCString()}
-        </div>
-        <div className="post_controls">
+        <div className="reply_controls">
             {ourUser?.uid === post.userId && (
             <div className="mod-controls">
                 <button className="delete">Delete</button>
             </div>
             )}
         </div>
-        {false && (<div className="post_replies"></div>)}
     </div>
     );
 };

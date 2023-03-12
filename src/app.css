@@ -62,7 +62,7 @@ a:hover {
     top: 0;
     width: 100%;
     box-sizing: border-box;
-    padding: 16px 400px;
+    padding: 16px 20vmin;
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -123,28 +123,74 @@ form {
 
 .post {
     width: 600px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 24px 32px;
-    overflow-wrap: break-word;
     display: flex;
-    align-items: baseline;
     flex-direction: column;
-    text-align: left;
+    padding: 20px 26px;
     gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.post > .displayName {
+@media only screen and (max-width: 800px) {
+    .navbar {
+        padding: 16px 16px;
+    }
+
+    .post {
+        width: 80vmin;
+    }
+}
+
+.post:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.post:active {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.post_displayName {
     font-size: 32px;
     font-weight: bold;
 }
 
-.post > .createdAt {
+.post_createdAt {
     font-size: 14px;
 }
 
-.post > .controls {
+.post_controls {
     display: flex;
     width: 100%;
     justify-content: space-between;
     gap: 8px;
+}
+
+.post_replies {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.reply {
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.reply:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.reply:active {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.reply_displayName {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.reply_content {
+    font-size: 14px;
 }
