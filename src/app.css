@@ -1,0 +1,150 @@
+body {
+    margin: 0;
+    font-family: 'Roboto';
+    background-color: #2D3833;
+    color: white;
+}
+
+input[type=submit],
+button {
+    background-color: #2D3833;
+    border: 1px solid white;
+    color: white;
+    font-family: 'Roboto';
+    padding: 10px 24px;
+}
+
+input[type=submit]:disabled,
+button:disabled {
+    background-color: #1C2320 !important;
+    border: 1px solid #4B4B4B;
+    color: #4B4B4B;
+}
+
+input[type=submit]:hover,
+button:hover {
+    background-color: #3C4B44;
+}
+
+input[type=submit]:active,
+button:active {
+    background-color: #36433D;
+}
+
+input {
+    padding: 10px 12px;
+    background: none;
+    border: 1px solid white;
+    color: white;
+    margin: 0px;
+}
+
+h1 {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+a:visited {
+    color: inherit;
+}
+
+a:hover {
+    color: #adadad;
+}
+
+.navbar {
+    overflow: hidden;
+    position: fixed;
+    background-color: #2D3833;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px 400px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    text-decoration: none;
+}
+
+.navbar > .links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.navbar > .links > .logo {
+    font-weight: bold;
+    font-size: 32px;
+    color: white;
+}
+
+.navbar > .user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.app-content {
+    padding-top: 80px;
+}
+
+.main, .register, .login, .create-post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.refresh {
+    position: fixed;
+}
+
+.posts {
+    margin-top: 52px;
+    display: flex;  
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.post {
+    width: 600px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 24px 32px;
+    overflow-wrap: break-word;
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+    text-align: left;
+    gap: 12px;
+}
+
+.post > .displayName {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.post > .createdAt {
+    font-size: 14px;
+}
+
+.post > .controls {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+}
