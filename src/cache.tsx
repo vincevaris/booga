@@ -44,7 +44,7 @@ export const getPostsWithCache = async () => {
     console.log('Fetching recent posts with regards to cache rules')
 
     if (postCache.size === 0)
-       forceUpdatePosts();
+        await forceUpdatePosts();
     else
         console.log(`Using previous cache for recent posts`);
 
