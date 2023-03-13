@@ -32,7 +32,8 @@ button:active {
     background-color: #36433D;
 }
 
-input {
+input, textarea {
+    font-family: 'Roboto';
     padding: 10px 12px;
     background: none;
     border: 1px solid white;
@@ -130,6 +131,8 @@ form {
     gap: 12px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     text-align: left;
+    white-space: pre-line;
+    line-break: anywhere;
 }
 
 @media only screen and (max-width: 800px) {

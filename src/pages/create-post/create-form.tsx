@@ -51,7 +51,7 @@ export const CreatePostForm = () => {
 
     return (
     <form onSubmit={handleSubmit(onCreatePost)}>
-        <input type="text" placeholder="What's on your mind?" {...register("content")} />
+        <textarea placeholder="What's on your mind?" {...register("content")} />
         <input type="submit" value="Post" disabled={disabled} />
         {errorMessage && (
             <p className="error">{errorMessage}</p>
