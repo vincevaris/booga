@@ -6,7 +6,6 @@ import { auth, db } from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { forceUpdatePosts } from '../../cache';
 
 interface CreatePostFormData {
     content: string;
@@ -41,7 +40,6 @@ export const CreatePostForm = () => {
             userId: user?.uid,
             createdAt: serverTimestamp()
         }).then(async (result) => {
-            await forceUpdatePosts();
             navigate('/');
         }).catch((error) => {
             setErrorMessage(error.message);
