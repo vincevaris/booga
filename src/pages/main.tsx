@@ -1,7 +1,7 @@
-import { Timestamp } from 'firebase/firestore';
+import { collection, limitToLast, onSnapshot, orderBy, query, QuerySnapshot, Timestamp } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { forceUpdatePosts, getPostsWithCache } from '../cache';
 import { Post } from '../components/post';
+import { db } from '../config/firebase';
 
 export interface IUser {
     id: string;
@@ -16,25 +16,39 @@ export interface IPost {
 }
 
 export const Main = () => {
-    const [postsList, setPostsList] = useState<IPost[] | null>();
-    const [disabled, setDisabled] = useState(false);
+    const [timeline, setTimeline] = useState<IPost[]>([]);
     
-    const onRefresh = async () => {
-        setDisabled(true);
-        await forceUpdatePosts();
-        getPosts();
-        setTimeout(() => setDisabled(false), 1000);
-    };
-    
-    const getPosts = async () => setPostsList(await getPostsWithCache());
+    const addPostToTimeline = (post: IPost) => setTimeline((currentTimeline) => {
+        const index = currentTimeline.findIndex((p) => p.id === post.id);
+        if (index === -1) return [ post, ...currentTimeline ];
+        
+        currentTimeline[index] = post;
+        return currentTimeline;
+    });
+    const removePostFromTimeline = (id: string) => setTimeline((currentTimeline) => currentTimeline.filter((post) => post.id !== id));
 
-    useEffect(() => { getPosts() }, []);
+    useEffect(() => {
+        const handleTimelineChanges = (snapshot: QuerySnapshot) => snapshot.docChanges().forEach((change) => {
+            if (change.type === 'added' || change.type === 'modified')
+                addPostToTimeline({...change.doc.data(), id: change.doc.id } as IPost);
+            if (change.type === 'removed')
+                removePostFromTimeline(change.doc.id);
+        });
+
+        const postQuery = query(collection(db, 'posts'), orderBy('createdAt', 'asc'), limitToLast(10));
+        const unsubscribe = onSnapshot(postQuery, handleTimelineChanges, err => console.log(err));
+
+        return () => unsubscribe();
+    }, [])
+
+    const sortByCreationDate = (x: IPost, y: IPost) => y.createdAt.toMillis() - x.createdAt.toMillis();
 
     return (
     <div className='main'>
-        <button className='refresh' onClick={onRefresh} disabled={disabled}>Refresh</button>
         <div className='posts'>
-            {postsList?.map((post) => <Post key={post.id} post={post}/>)}
+            {timeline
+                .sort(sortByCreationDate)
+                .map((post) => <Post key={post.id} post={post}/>)}
         </div>
     </div>
     );
