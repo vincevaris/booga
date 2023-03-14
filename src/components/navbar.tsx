@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut } from "firebase/auth";
+import logo from '../assets/logo_white_500-120.png';
 
 export const Navbar = () => {
     const [user] = useAuthState(auth);
@@ -13,7 +14,7 @@ export const Navbar = () => {
     return (
     <div className="navbar">
         <div className="links">
-            <Link className="logo" to="/">Boogalink</Link>
+            <Link className="logo" to="/"><img src={logo} width='140vmin' alt='logo' /></Link>
             {user && (
                 <Link to="/compose"><button>Compose</button></Link>
             )}
