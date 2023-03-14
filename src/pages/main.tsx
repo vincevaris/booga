@@ -18,14 +18,14 @@ export interface IPost {
 export const Main = () => {
     const [timeline, setTimeline] = useState<IPost[]>([]);
     
-    const addPostToTimeline = (post: IPost) => setTimeline((currentTimeline) => {
-        const index = currentTimeline.findIndex((p) => p.id === post.id);
-        if (index === -1) return [ post, ...currentTimeline ];
+    const addPostToTimeline = (post: IPost) => setTimeline((prev) => {
+        const index = prev.findIndex((p) => p.id === post.id);
+        if (index === -1) return [ post, ...prev ];
         
-        currentTimeline[index] = post;
-        return currentTimeline;
+        prev[index] = post;
+        return prev;
     });
-    const removePostFromTimeline = (id: string) => setTimeline((currentTimeline) => currentTimeline.filter((post) => post.id !== id));
+    const removePostFromTimeline = (id: string) => setTimeline((prev) => prev.filter((post) => post.id !== id));
 
     useEffect(() => {
         const handleTimelineChanges = (snapshot: QuerySnapshot) => snapshot.docChanges().forEach((change) => {
