@@ -119,12 +119,12 @@ export const Post = (props: Props) => {
             <div className="post_user-controls">
                 <button
                 className={isSelfLiked() ? 'toggle-on' : ''}
-                onClick={() => isSelfLiked() ? removeLike() : likePost(1)}>
+                onClick={() => self && (isSelfLiked() ? removeLike() : likePost(1))}>
                     &#128077; {getLikes().length}
                 </button>
                 <button 
                 className={isSelfDisliked() ? 'toggle-on' : ''}
-                onClick={() => isSelfDisliked() ? removeLike() : likePost(-1)}>
+                onClick={() => self && (isSelfDisliked() ? removeLike() : likePost(-1))}>
                     &#128078; {getDislikes().length}
                 </button>
             </div>
