@@ -41,7 +41,6 @@ export const RegisterForm = () => {
             .then(async (result) => {
                 const userRef = doc(usersRef, result.user.uid);
                 await setDoc(userRef, {
-                    userId: userRef.id,
                     displayName: data.displayName,
                 });
 
