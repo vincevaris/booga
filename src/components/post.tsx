@@ -4,7 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { getUserWithCache } from "../cache";
 import { auth, db } from "../config/firebase";
-import { IPost, IUser } from "../pages/main";
+import { IPost, IUser } from "../pages/home";
 
 interface Props {
     key: string,

@@ -1,6 +1,6 @@
 import { collection, doc, getDoc } from "firebase/firestore";
 import { db } from "./config/firebase";
-import { IUser } from "./pages/main";
+import { IUser } from "./pages/home";
 
 let userCache = new Map<string, IUser>();
 

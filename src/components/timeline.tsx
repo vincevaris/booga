@@ -1,6 +1,6 @@
 import { onSnapshot, Query, QuerySnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { IPost } from '../pages/main';
+import { IPost } from '../pages/home';
 import { Post } from './post';
 
 interface Props {

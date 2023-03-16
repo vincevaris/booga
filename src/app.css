@@ -95,11 +95,11 @@ a:hover {
     gap: 12px;
 }
 
-.app-content {
+.main {
     padding-top: 80px;
 }
 
-.main, .register, .login, .create-post, .user-profile {
+.home, .register, .login, .create-post, .user-profile {
     display: flex;
     flex-direction: column;
     align-items: center;

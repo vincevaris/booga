@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getUserWithCache } from "../cache";
 import { auth } from "../config/firebase";
-import { IPost, IUser } from "../pages/main";
+import { IPost, IUser } from "../pages/home";
 
 interface Props {
     key: string,

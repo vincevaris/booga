@@ -5,7 +5,7 @@ import { getUserWithCache } from "../cache";
 import { Post } from "../components/post";
 import { Timeline } from "../components/timeline";
 import { db } from "../config/firebase";
-import { IPost, IUser } from "./main";
+import { IPost, IUser } from "./home";
 
 type UserProfileParams = {
     id: string,

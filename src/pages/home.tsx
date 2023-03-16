@@ -14,9 +14,9 @@ export interface IPost {
     createdAt: Timestamp;
 }
 
-export const Main = () => {
+export const Home = () => {
     return (
-        <div className='main'>
+        <div className='home'>
             <Timeline query={query(collection(db, 'posts'), orderBy('createdAt', 'asc'), limitToLast(10))} />
         </div>
     );
