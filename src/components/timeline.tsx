@@ -21,12 +21,16 @@ export const Timeline = (props: Props) => {
     const removePost = (id: string) => setPosts((prev) => prev.filter((post) => post.id !== id));
 
     useEffect(() => {
-        const handleChanges = (snapshot: QuerySnapshot) => snapshot.docChanges().forEach((change) => {
-            if (change.type === 'added' || change.type === 'modified')
-                addPost({...change.doc.data(), id: change.doc.id } as IPost);
-            if (change.type === 'removed')
-                removePost(change.doc.id);
-        });
+        const handleChanges = (snapshot: QuerySnapshot) => {
+            if (snapshot.metadata.hasPendingWrites) return;
+            
+            snapshot.docChanges().forEach((change) => {
+                if (change.type === 'added' || change.type === 'modified')
+                    addPost({...change.doc.data(), id: change.doc.id } as IPost);
+                if (change.type === 'removed')
+                    removePost(change.doc.id);
+            });
+        };
 
         const unsubscribe = onSnapshot(query, handleChanges, err => console.log(err));
 

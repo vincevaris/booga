@@ -35,6 +35,7 @@ button:active {
 input, textarea {
     font-family: 'Roboto';
     padding: 10px 12px;
+    box-sizing: border-box;
     background: none;
     border: 1px solid white;
     color: white;
@@ -109,25 +110,37 @@ a:hover {
 form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     gap: 8px;
+}
+
+.composeBox {
+    display: flex;
+    width: 600px;
+}
+
+.composeBox-content {
+    width: 100%;
+    height: 80px;
+    resize: none;
+    outline: none;
 }
 
 .refresh {
     position: fixed;
 }
 
-.posts {
-    margin-top: 52px;
-    display: flex;  
+.timeline {
+    width: 600px;
+    display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 4px;
 }
 
 .post {
-    width: 600px;
+    width: 100%;
     display: flex;
+    box-sizing: border-box;
     flex-direction: column;
     padding: 20px 26px;
     gap: 12px;

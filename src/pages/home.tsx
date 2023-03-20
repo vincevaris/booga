@@ -1,6 +1,8 @@
 import { collection, limitToLast, orderBy, query, Timestamp } from 'firebase/firestore';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { ComposeBox } from '../components/composebox';
 import { Timeline } from '../components/timeline';
-import { db } from '../config/firebase';
+import { auth, db } from '../config/firebase';
 
 export interface IUser {
     id: string;
@@ -15,8 +17,11 @@ export interface IPost {
 }
 
 export const Home = () => {
+    const [ user ] = useAuthState(auth);
+
     return (
         <div className='home'>
+            {user && <ComposeBox />}
             <Timeline query={query(collection(db, 'posts'), orderBy('createdAt', 'asc'), limitToLast(10))} />
         </div>
     );

@@ -15,9 +15,7 @@ export const Navbar = () => {
     <div className="navbar">
         <div className="links">
             <Link className="logo" to="/"><img src={logo} width='140vmin' alt='logo' /></Link>
-            {user && (
-                <Link to="/compose"><button>Compose</button></Link>
-            )}
+          
         </div>
         <div className="user">
             {!user ? (
