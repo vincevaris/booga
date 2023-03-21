@@ -37,7 +37,7 @@ input, textarea {
     padding: 10px 12px;
     box-sizing: border-box;
     background: none;
-    border: 1px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
     margin: 0px;
 }
@@ -124,6 +124,8 @@ form {
     height: 80px;
     resize: none;
     outline: none;
+    font-size: 20px;
+    padding: 20px 20px;
 }
 
 .refresh {
