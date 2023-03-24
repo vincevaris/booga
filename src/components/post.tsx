@@ -1,9 +1,10 @@
 import { addDoc, collection, deleteDoc, doc, DocumentReference, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { getDownloadURL, ref } from "firebase/storage";
+import { SetStateAction, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { getUserWithCache } from "../cache";
-import { auth, db } from "../config/firebase";
+import { auth, db, storage } from "../config/firebase";
 import { IPost, IUser } from "../pages/home";
 
 interface Props {
@@ -32,6 +33,7 @@ export const Post = (props: Props) => {
 
     const [author, setAuthor] = useState<IUser>();
     const [likes, setLikes] = useState<ILike[]>([]);
+    const [mediaUrls, setMediaUrls] = useState<string[]>([]);
     
     const [self] = useAuthState(auth);
     const [selfLikeRef, setSelfLikeRef] = useState<DocumentReference>();
@@ -57,6 +59,15 @@ export const Post = (props: Props) => {
 
         // If the user liked/disliked this post, update self like reference
         setSelfLikeRef(data.docs.find((doc) => doc.get('userId') === self?.uid)?.ref);
+    };
+
+    const fetchMedia = async () => {
+        const urls: string[] = [];
+        for (const path of post.mediaPaths) {
+            const url = await getDownloadURL(ref(storage, path));
+            urls.push(url);
+        };
+        setMediaUrls(urls);
     };
 
     const likePost = async (value: number) => {
@@ -102,6 +113,9 @@ export const Post = (props: Props) => {
     useEffect(() => {
         fetchAuthor();
         fetchLikes();
+        if (post.mediaPaths && post.mediaPaths.length >= 1) {
+            fetchMedia();
+        }
     }, []);
 
     return (
@@ -112,6 +126,11 @@ export const Post = (props: Props) => {
         <div className="post_content">
             {styledContent}
         </div>
+        {mediaUrls.length >= 1 && (
+            <div className='post_media-container'>
+                {mediaUrls.map((url) => <img className='post_media' src={url} />)}
+            </div>
+        )}
         <div className="post_createdAt">
             {post.createdAt.toDate().toUTCString()}
         </div>
