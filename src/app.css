@@ -179,20 +179,6 @@ form {
     line-break: anywhere;
 }
 
-@media only screen and (max-width: 1300px) {
-    .navbar {
-        padding: 16px 16px;
-    }
-
-    .composeBox {
-        width: 80vmin;
-    }
-
-    .post {
-        width: 80vmin;
-    }
-}
-
 .post_displayName a {
     font-size: 30px;
     font-weight: bold;
@@ -299,4 +285,25 @@ form {
 .user-profile_displayName {
     font-size: 32px;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 1300px) {
+    .navbar {
+        padding: 16px 16px;
+    }
+
+    .composeBox {
+        width: 80vmin;
+    }
+
+    .post {
+        width: 80vmin;
+    }
+
+    .post_media,
+    .composeBox-media {
+        min-width: 10vmin;
+        max-width: 60vmin;
+        max-height: 80vmin;
+    }
 }
