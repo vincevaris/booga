@@ -33,7 +33,7 @@ export const ComposeBox = () => {
 
     const postsRef = collection(db, 'posts');
 
-    const [disabled, setDisabled] = useState(false);
+    const [disabled, setDisabled] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
 
     async function generateFileRef(): Promise<StorageReference> {
@@ -83,6 +83,7 @@ export const ComposeBox = () => {
 
     const onContentChange = (event: any) => {
         setContent(event.target.value);
+        setDisabled(event.target.value === '');
     };
 
     const removeContent = () => setContent('');
