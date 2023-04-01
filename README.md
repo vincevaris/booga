@@ -6,7 +6,12 @@ Boogalink is a social media platform that enables users to create posts and enga
 
 ## Features
 
-|Feature|Description|
-|--|--|
-|📝 **Posts**|Users can create posts including up to 280 characters, with optional image uploading.|
-|👍 **Reactions**|Users can react to another user's content by liking or disliking the post.|
+||Feature|Description|
+|-|--|--|
+|✔️|**Authentication**|Users can log-in / register using an email address and password.|
+|✔️|**Posts**|Users can create short posts of up to 280 characters that can include an image.|
+|✔️|**Reactions**|Users can like and dislike other users' posts.|
+|✔️|**Profiles**|Users can view other users' profiles to view all their posts.|
+|❌|**Mentions**|Users can not yet mention other users.|
+|❌|**Following**|Users can not yet follow other users.|
+|❌|**Replies**|Users can not yet reply to other users' posts.|
