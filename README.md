@@ -1,8 +1,8 @@
-# Boogalink
+# BoogaVerse
 
 ## About
 
-Boogalink is a social media platform that enables users to create posts and engage with others' content. It uses [React](https://react.dev/) and [Firebase](https://firebase.google.com/).
+BoogaVerse is a social media platform that enables users to create posts and engage with others' content. It uses [React](https://react.dev/) and [Firebase](https://firebase.google.com/).
 
 ## Features
 
